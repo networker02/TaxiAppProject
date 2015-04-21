@@ -24,7 +24,7 @@ public class DashboardActivity extends Activity {
         TextView textView = (TextView) findViewById(R.id.textView);
         Button avisoBtn = (Button) findViewById(R.id.avisoBtn);
         ImageButton panicButton = (ImageButton) findViewById(R.id.panicButton);
-//        Fragment fragment = (Fragment) setContentView();
+
 
 
 

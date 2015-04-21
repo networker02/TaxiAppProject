@@ -40,15 +40,16 @@
         android:layout_alignBottom="@+id/ok_busy_switch" />
 
     <fragment
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
         android:name="com.google.android.gms.maps.MapFragment"
         android:id="@+id/fragment"
+        tools:layout="@layout/activity_maps"
+        android:layout_above="@+id/avisoBtn"
         android:layout_below="@+id/ok_busy_switch"
-        android:layout_marginTop="200dp"
-        android:layout_alignLeft="@+id/ok_busy_switch"
-        android:layout_alignStart="@+id/ok_busy_switch"
-        android:layout_toLeftOf="@+id/panicButton"
-        tools:layout="@layout/activity_maps" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
