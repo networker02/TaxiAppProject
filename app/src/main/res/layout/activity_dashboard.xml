@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.handycartaxi.taxiappproject.DashboardActivity">
+
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disponible"
+        android:id="@+id/ok_busy_switch"
+        android:layout_marginTop="37dp"
+        android:layout_alignRight="@+id/avisoBtn"
+        android:layout_alignEnd="@+id/avisoBtn"
+        android:checked="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aviso de Llegada"
+        android:id="@+id/avisoBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/panicButton"
+        android:src="@drawable/panic_btn"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/ok_busy_switch" />
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:id="@+id/fragment"
+        android:layout_below="@+id/ok_busy_switch"
+        android:layout_marginTop="200dp"
+        android:layout_alignLeft="@+id/ok_busy_switch"
+        android:layout_alignStart="@+id/ok_busy_switch"
+        android:layout_toLeftOf="@+id/panicButton"
+        tools:layout="@layout/activity_maps" />
+
+</RelativeLayout>
