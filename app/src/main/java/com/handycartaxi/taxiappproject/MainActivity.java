@@ -2,7 +2,6 @@ package com.handycartaxi.taxiappproject;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +30,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), CompaniasListActivity.class);
                 startActivity(i);
-                overridePendingTransition(R.anim.animation1,R.anim.animaton2);
+                overridePendingTransition(R.anim.animation1,R.anim.animation2);
             }
         });
 
@@ -42,7 +41,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(i);
-                overridePendingTransition(R.anim.animation1,R.anim.animaton2);
+                overridePendingTransition(R.anim.animation1,R.anim.animation2);
             }
         });
 

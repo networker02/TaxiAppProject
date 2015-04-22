@@ -18,5 +18,6 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
     <string name="title_activity_llegada">LlegadaActivity</string>
+    <string name="title_activity_loading">LoadingActivity</string>
 
 </resources>

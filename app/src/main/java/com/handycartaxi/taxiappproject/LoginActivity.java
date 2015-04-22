@@ -8,10 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.handycartaxi.taxiappproject.R;
 
 public class LoginActivity extends Activity {
 
@@ -33,7 +30,7 @@ public class LoginActivity extends Activity {
                 if (checkCredentials(userField.getText().toString(), passField.getText().toString())){
                     Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
                     startActivity(i);
-                    overridePendingTransition(R.anim.animation1, R.anim.animaton2);
+                    overridePendingTransition(R.anim.animation1, R.anim.animation2);
                 }else{
                     Toast.makeText(getApplicationContext(), "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
                 }

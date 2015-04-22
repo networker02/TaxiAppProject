@@ -56,6 +56,10 @@
             android:name=".LlegadaActivity"
             android:label="@string/title_activity_llegada" >
         </activity>
+        <activity
+            android:name=".LoadingActivity"
+            android:label="@string/title_activity_loading" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

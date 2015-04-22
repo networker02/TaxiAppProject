@@ -114,7 +114,7 @@ public class CompaniasListActivity extends Activity {
                 Intent itemClick = new Intent(getApplicationContext(), TaxiTypeActivity.class);
 //                itemClick.putExtra("compania", companias.get(position));
                 startActivity(itemClick);
-                overridePendingTransition(R.anim.animation1,R.anim.animaton2);
+                overridePendingTransition(R.anim.animation1,R.anim.animation2);
 
             }
         });

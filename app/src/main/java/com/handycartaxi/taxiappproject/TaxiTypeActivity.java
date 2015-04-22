@@ -7,9 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-
-import com.handycartaxi.taxiappproject.R;
 
 public class TaxiTypeActivity extends Activity {
 
@@ -27,9 +24,9 @@ public class TaxiTypeActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), LlegadaActivity.class);
+                Intent i = new Intent(getApplicationContext(), LoadingActivity.class);
                 startActivity(i);
-                overridePendingTransition(R.anim.animation1,R.anim.animaton2);
+                overridePendingTransition(R.anim.animation1,R.anim.animation2);
             }
         });
 
