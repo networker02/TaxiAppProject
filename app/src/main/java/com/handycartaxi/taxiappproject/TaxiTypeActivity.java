@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class TaxiTypeActivity extends Activity {
 
@@ -18,6 +21,7 @@ public class TaxiTypeActivity extends Activity {
 
         Button pedirBtn = (Button) findViewById(R.id.pedirButton2);
         Button cancelBtn = (Button) findViewById(R.id.cancelarbtn);
+        RadioGroup radioGroup;
 
 
         pedirBtn.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +35,26 @@ public class TaxiTypeActivity extends Activity {
         });
 
 
+        /* Initialize Radio Group and attach click handler */
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        radioGroup.clearCheck();
+
+        /* Attach CheckedChangeListener to radio group */
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if(null!=rb && checkedId > -1){
+
+                    //Mandar por webservice el tipo de Vehiculo seleccionado,
+//                    para que en la Base sepan cual tipo asignar
+                    //AQUI
+
+                    Toast.makeText(getApplicationContext(), rb.getText(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
 
     }
