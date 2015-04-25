@@ -35,6 +35,18 @@ public class TaxiTypeActivity extends Activity {
         });
 
 
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.animation1,R.anim.animation2);
+                Toast.makeText(getApplicationContext(),"Se ha cancelado su solicitud", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
         /* Initialize Radio Group and attach click handler */
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         radioGroup.clearCheck();
@@ -48,7 +60,7 @@ public class TaxiTypeActivity extends Activity {
 
                     //Mandar por webservice el tipo de Vehiculo seleccionado,
 //                    para que en la Base sepan cual tipo asignar
-                    //AQUI
+                    //AQUI\
 
                     Toast.makeText(getApplicationContext(), rb.getText(), Toast.LENGTH_SHORT).show();
                 }

@@ -1,9 +1,14 @@
 package com.handycartaxi.taxiappproject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
 import com.handycartaxi.taxiappproject.R;
 
 public class TaxiDetailsActivity extends Activity {
@@ -12,7 +17,27 @@ public class TaxiDetailsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taxi_details);
+
+        Button cancelarBtn = (Button) findViewById(R.id.cancelarBtn);
+
+
+
+        cancelarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.animation1,R.anim.animation2);
+                Toast.makeText(getApplicationContext(), "Se ha cancelado su solicitud", Toast.LENGTH_SHORT).show();
+                //Colocar aqui CANCEL para el WebService
+
+
+            }
+        });
+
     }
+
+
 
 
     @Override

@@ -14,19 +14,19 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Escoga el tipo de Taxi"
         android:id="@+id/textView"
-        android:layout_above="@+id/radioGroup"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp" />
+        android:layout_marginTop="45dp" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_above="@+id/pedirButton2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="53dp">
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="38dp">
 
 
         <RadioButton
@@ -78,9 +78,9 @@
         android:layout_height="wrap_content"
         android:text="Cancelar"
         android:id="@+id/cancelarbtn"
+        android:layout_marginBottom="21dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="37dp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -90,6 +90,14 @@
         android:layout_above="@+id/cancelarbtn"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Al presionar Pedir, usted acepta nuestros Términos y Condiciones"
+        android:id="@+id/textView2"
+        android:layout_above="@+id/pedirButton2"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
