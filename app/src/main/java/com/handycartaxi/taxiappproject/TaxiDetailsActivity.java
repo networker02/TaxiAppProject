@@ -28,6 +28,7 @@ public class TaxiDetailsActivity extends Activity {
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.animation1,R.anim.animation2);
+                finishAffinity();
                 Toast.makeText(getApplicationContext(), "Se ha cancelado su solicitud", Toast.LENGTH_SHORT).show();
                 //Colocar aqui CANCEL para el WebService
 

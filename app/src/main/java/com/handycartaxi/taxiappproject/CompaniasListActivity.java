@@ -58,7 +58,7 @@ public class CompaniasListActivity extends Activity {
         companias.add(new Compania(R.drawable.apolotaxilogo3));
         companias.add(new Compania(R.drawable.ruedataxilogo2));
         companias.add(new Compania(R.drawable.aerotaxilogo));
-        companias.add(new Compania(R.drawable.excelentetaxilogo));
+        companias.add(new Compania(R.drawable.antenataxilogo));
         companias.add(new Compania(R.drawable.apolotaxilogo3));
         companias.add(new Compania(R.drawable.ruedataxilogo2));
         companias.add(new Compania(R.drawable.aerotaxilogo));

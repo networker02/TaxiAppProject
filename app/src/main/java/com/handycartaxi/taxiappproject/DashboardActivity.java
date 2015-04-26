@@ -39,6 +39,12 @@ public class DashboardActivity extends Activity {
             }
         });
 
+        panicButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //PONER AQUI WEBSERVICE PARA AVISAR PANICO O PELIGRO
+            }
+        });
 
 
 

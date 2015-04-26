@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,9 +39,9 @@ public class LoadingActivity extends Activity {
                 overridePendingTransition(R.anim.animation1,R.anim.animation2);
                 Toast.makeText(getApplicationContext(),"Se ha cancelado su solicitud", Toast.LENGTH_SHORT).show();
                 cancelWasPressed = false;
-
+                finishAffinity();
                 //Colocar aqui cancel para el WebService
-                showDialog();
+//                showDialog();
             }
 
 
@@ -69,6 +70,8 @@ public class LoadingActivity extends Activity {
                         Intent i = new Intent(getApplicationContext(), TaxiDetailsActivity.class);
                         startActivity(i);
                         overridePendingTransition(R.anim.animation1, R.anim.animation2);
+                        finish();
+                        //Colocar aqui GET DRIVER para el WebService
                     }
 
                 }//met
@@ -104,6 +107,13 @@ public class LoadingActivity extends Activity {
                 .setMessage("Message saved as draft.");
 
         return builder.create();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        cancelWasPressed = false;
+
     }
 
 

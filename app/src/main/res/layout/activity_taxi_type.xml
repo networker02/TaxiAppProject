@@ -42,8 +42,8 @@
         <RadioButton
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Minivan"
-            android:id="@+id/radioButton2"
+            android:text="Minibus"
+            android:id="@+id/minubusOption"
             android:checked="false"
             android:layout_below="@+id/radioButton1"
             android:layout_alignLeft="@+id/radioButton1"
@@ -53,23 +53,23 @@
         <RadioButton
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Especial"
-            android:id="@+id/radioButton3"
+            android:text="Unidad Confortable"
+            android:id="@+id/confortableOption"
             android:checked="false"
-            android:layout_below="@+id/radioButton2"
-            android:layout_alignLeft="@+id/radioButton2"
-            android:layout_alignStart="@+id/radioButton2"
+            android:layout_below="@+id/minubusOption"
+            android:layout_alignLeft="@+id/minubusOption"
+            android:layout_alignStart="@+id/minubusOption"
             android:layout_marginTop="15dp" />
 
         <RadioButton
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Unidad de Lujo"
-            android:id="@+id/radioButton4"
+            android:text="Unidad Especial"
+            android:id="@+id/especialOption"
             android:checked="false"
-            android:layout_below="@+id/radioButton2"
-            android:layout_alignLeft="@+id/radioButton3"
-            android:layout_alignStart="@+id/radioButton3"
+            android:layout_below="@+id/minubusOption"
+            android:layout_alignLeft="@+id/confortableOption"
+            android:layout_alignStart="@+id/confortableOption"
             android:layout_marginTop="15dp" />
     </RadioGroup>
 
