@@ -51,7 +51,7 @@ public class LoadingActivity extends Activity {
 
 //COMENTADO PORQUE HAY QUE PONER ID PEDIDO
                 DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
-//                dictionaryImp.put("PedidoID",idPedido );
+                dictionaryImp.put("Pedido",""+Global.PEDIDO );
 
                 AsyncHttp.get("http://"+Global.IP+"/taxwebapp/Pedido/canceled", dictionaryImp, new HttpResponseCallback() {
                     @Override
@@ -72,72 +72,6 @@ public class LoadingActivity extends Activity {
 
 
         });
-
-
-
-            Runnable myThread = new Runnable() {
-
-                public void run() {
-                    //don't hard code things, use a constant for max progress value
-                    while ( myProgress<500 ){
-                        try{
-                            myHandle.sendMessage(myHandle.obtainMessage());
-                            //same
-                            Thread.sleep( 50 );
-                        } catch(Exception ex){
-                            //never live an empty catch statement, you are missing exceptions and
-                            //can't correct them
-                            Log.e("MyCurrentClass", "Error during async data processing");
-                        }//catch
-                    }//while
-                    //start new activity here
-
-                    if (cancelWasPressed){
-                        Intent i = new Intent(getApplicationContext(), TaxiDetailsActivity.class);
-                        startActivity(i);
-                        overridePendingTransition(R.anim.animation1, R.anim.animation2);
-                        finish();
- //Colocar aqui Servicio GET DRIVER para el WebService
-
-
-//REVISAR
-   /*
-                        DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
-//                        dictionaryImp.put("username",username );
-//                        dictionaryImp.put("password",password);
-                        AsyncHttp.get("http://"+Global.IP+"/taxwebapp/UserLogin/IsLoginCorrect",dictionaryImp,new HttpResponseCallback() {
-                            @Override
-                            public void onFail(String errorMessage, int StatusCode) {
-
-                            }
-
-                            @Override
-                            public void call(String s) {
-
-
-                            }
-                        });
-*/
-
-                    }
-
-                }//met
-
-                Handler myHandle = new Handler() {
-
-                    @Override
-                    public void handleMessage(Message msg) {
-                        // TODO Auto-generated method stub
-                        myProgress++;
-                        myProgressBar.setProgress(myProgress);
-                    }
-                };
-            };
-
-            new Thread(myThread).start();
-
-
-
 
 
 }

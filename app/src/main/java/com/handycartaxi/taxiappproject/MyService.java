@@ -92,9 +92,9 @@ public class MyService extends Service {
                     g.setTIEMPO(jsonItem.getInt("Tiempo"));
 
                     System.out.println("ID ASIGNADO ="+Global.ID_ASIGNADO);
-                    if(Global.ID_ASIGNADO!=0){
-                        stopSelf();
-                    }
+//                    if(Global.ID_ASIGNADO!=0){
+//                        stopSelf();
+//                    }
                                           /*  Intent i = new Intent(getApplicationContext(), TaxiDetailsActivity.class);
                                             startActivity(i);
                                             overridePendingTransition(R.anim.animation1, R.anim.animation2);

@@ -23,9 +23,14 @@ import com.handycartaxi.taxiappproject.webserviceconection.HttpResponseCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class TaxiTypeActivity extends Activity {
 
     int id_tipo_taxi=1;
+    ScheduledExecutorService executorService;
 //    double lat;
 //    double lon;
 
@@ -143,7 +148,7 @@ public class TaxiTypeActivity extends Activity {
 
 
 
-                                startService(new Intent(getApplicationContext(), MyService.class));
+                       //         startService(new Intent(getApplicationContext(), MyService.class));
 
                                 //getData();
 
@@ -175,6 +180,40 @@ public class TaxiTypeActivity extends Activity {
 
             }
         });
+
+
+                executorService = Executors.newScheduledThreadPool(1);
+                executorService.scheduleAtFixedRate(new Runnable() {
+                    public void run() {
+                        //put query logic here
+
+
+                        DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
+                        dictionaryImp.put("Pedido",""+Global.PEDIDO );
+
+                        AsyncHttp.get("http://" + Global.IP + "/taxwebapp/Taxi/getTaxiData", dictionaryImp, new HttpResponseCallback() {
+
+                            @Override
+                            public void onFail(String errorMessage, int StatusCode) {
+                                System.out.println("ENTRO AL FAIL");
+                            }
+
+
+                            @Override
+                            public void call(String s) {
+                                System.out.println("ENTRO AL CALLLLLLL");
+                                System.out.println(s);
+
+                                esperarQueAsignenTaxi(s);
+
+
+                            }
+                        });
+
+
+                    }
+
+                }, 5, 5, TimeUnit.SECONDS);
 
 
     }
@@ -221,13 +260,7 @@ public class TaxiTypeActivity extends Activity {
         });
     }
 
-    private final LocationListener mLocationListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(final Location location) {
-            //your code here
-            new LatLng(location.getLatitude(), location.getLatitude());
-        }
-    };
+
 
 
     @Override
@@ -247,5 +280,39 @@ public class TaxiTypeActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void esperarQueAsignenTaxi(String s){
+
+        try {
+            System.out.println("SYSOOOOOOOOOO " + s);
+            JSONObject jsonObject = new JSONObject(s);
+            JSONObject jsonItem = jsonObject.getJSONObject("pedidoC");
+
+
+            if(jsonItem!=null){
+                Global.ID_ASIGNADO = jsonItem.getInt("IdAsignado");
+                Global.TAXI_NAME = jsonItem.getString("TaxiName");
+                Global.UNIDAD = jsonItem.getInt("Unidad");
+                Global.COLOR_VEHICULO = jsonItem.getString("ColorAto");
+                Global.ID_FOTO_TAXISTA = jsonItem.getInt("Foto");
+                Global.TIEMPO = jsonItem.getInt("Tiempo");
+                System.out.println("ID ASIGNADO ="+Global.ID_ASIGNADO);
+                executorService.shutdown();
+
+            Intent i = new Intent(getApplicationContext(), TaxiDetailsActivity.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.animation1, R.anim.animation2);
+            finish();
+
+            }
+
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }

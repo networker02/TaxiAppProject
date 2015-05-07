@@ -78,6 +78,7 @@ public class DashboardActivity extends Activity {
                 System.out.println("Taxi ID "+Global.TAXI_ID);
 
                 AsyncHttp.get("http://" + Global.IP + "/taxwebapp/asignado/checkIfTaxiAssigned", dictionaryImp, new HttpResponseCallback() {
+
                     @Override
                     public void onFail(String errorMessage, int StatusCode) {
                         System.out.println(errorMessage);
