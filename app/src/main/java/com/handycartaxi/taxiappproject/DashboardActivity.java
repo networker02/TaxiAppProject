@@ -187,9 +187,10 @@ public class DashboardActivity extends Activity {
                             Toast.makeText(getApplicationContext(), "Unidad en Servicio", Toast.LENGTH_SHORT).show();
                             avisoBtn.setEnabled(false);
 
+                        //Poner aqui ping, para cambiar texto en la app del cliente para decirle que su taxista llegó
                             avisarllegada();
 
-                        //Poner aqui ping, para cambiar texto en la app del cliente para decirle que su taxista llegó
+
 
                     }else{
                         Toast.makeText(getApplicationContext(), "Aun no se le ha asignado un servicio", Toast.LENGTH_LONG).show();
@@ -212,6 +213,8 @@ public class DashboardActivity extends Activity {
 
                             terminarServicio();
 
+//AQUI
+//                            en visual studio, cuando el taxista termina el servicio, delete from asignado where id_taxi=
 
                         }
                     }
@@ -343,6 +346,11 @@ public class DashboardActivity extends Activity {
             public void call(String s) {
                 System.out.println(s);
 
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.animation1, R.anim.animation2);
+                finish();
+
             }
         });
     }
@@ -359,6 +367,9 @@ public class DashboardActivity extends Activity {
                 Global.LON = jsonItem.getDouble("Longitud");
                 Global.LAT = jsonItem.getDouble("Latitud");
                 Toast.makeText(getApplicationContext(), "Su taxi ha sido asignado a un servicio, Pedido: "+Global.PEDIDO, Toast.LENGTH_LONG).show();
+
+//AQUI
+                //EN visual studio, cuando se asigne un taxista a un servicio, la columna id estatus debe cambiar a 2 (En Servicio)
                 executorService.shutdown();
             }
 

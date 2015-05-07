@@ -1,7 +1,9 @@
 package com.handycartaxi.taxiappproject;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +23,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class TaxiDetailsActivity extends Activity {
 
@@ -31,6 +36,7 @@ public class TaxiDetailsActivity extends Activity {
     TextView taxistaMatricula;
     TextView taxistaVehiculo;
     TextView minutots;
+    ScheduledExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,10 +156,47 @@ public class TaxiDetailsActivity extends Activity {
             }
         }); */
 
-
-
 //PONER SSERVICIO QUE ESCUCHA A QUE EL TAXISTA LLEGUE AL DESTINO
-//llegaronAlDestino();
+
+
+        executorService = Executors.newScheduledThreadPool(1);
+        executorService.scheduleWithFixedDelay(new Runnable() {
+            public void run() {
+
+                //put query logic here
+
+                DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
+                dictionaryImp.put("PedidoId",""+Global.PEDIDO);
+                System.out.println("Pedido ID "+Global.PEDIDO);
+
+                AsyncHttp.get("http://" + Global.IP + "/taxwebapp/asignado/getData", dictionaryImp, new HttpResponseCallback() {
+
+                    @Override
+                    public void onFail(String errorMessage, int StatusCode) {
+                        System.out.println(errorMessage);
+
+                    }
+
+                    @Override
+                    public void call(String s) {
+                        System.out.println(s);
+
+                        AreWeThereYet(s);
+
+
+
+
+
+                    }
+                });
+
+
+
+
+
+            }
+
+         }, 10, 5, TimeUnit.MINUTES);
 
     }
 
@@ -185,6 +228,48 @@ public void llegaronAlDestino(){
     });
 
 }
+
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void AreWeThereYet(String s){
+
+        try {
+            System.out.println("AreWeThereYet " + s);
+            JSONObject jsonObject = new JSONObject(s);
+            JSONObject jsonItem = jsonObject.getJSONObject("data");
+
+
+            if(jsonItem!=null){
+                Global.AVISO_DE_LLEGADA = jsonItem.getBoolean("AvisoLlegada");
+
+                if(Global.AVISO_DE_LLEGADA){
+                    Intent i = new Intent(getApplicationContext(), LlegadaActivity.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.animation1, R.anim.animation2);
+                    finishAffinity();
+                    executorService.shutdown();
+                }
+
+
+
+                Intent i = new Intent(getApplicationContext(), TaxiDetailsActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.animation1, R.anim.animation2);
+                finish();
+
+            }
+
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

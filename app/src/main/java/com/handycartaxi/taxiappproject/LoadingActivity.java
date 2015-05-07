@@ -46,10 +46,8 @@ public class LoadingActivity extends Activity {
                 cancelWasPressed = false;
                 finishAffinity();
                 //Colocar aqui cancel para el WebService
-//                showDialog();
+                showDialog();
 
-
-//COMENTADO PORQUE HAY QUE PONER ID PEDIDO
                 DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
                 dictionaryImp.put("Pedido",""+Global.PEDIDO );
 
@@ -85,7 +83,7 @@ public class LoadingActivity extends Activity {
                 .setIcon(
                         getResources().getDrawable(
                                 android.R.drawable.alert_light_frame))
-                .setMessage("Message saved as draft.");
+                .setMessage("Pedido Cancelado.");
 
         return builder.create();
     }

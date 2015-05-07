@@ -22,7 +22,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Ha llegado a su destino"
         android:id="@+id/textView"
-        android:layout_below="@+id/imageView"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -31,10 +31,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Por favor, pague su tarifa"
         android:id="@+id/minutos"
+        android:layout_marginTop="22dp"
         android:layout_below="@+id/textView"
         android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"
-        android:layout_marginTop="60dp" />
+        android:layout_alignStart="@+id/imageView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,18 +42,58 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Gracias por utilizar HandyCar"
         android:id="@+id/companiaTextView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/minutos"
-        android:layout_alignStart="@+id/minutos" />
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/salirBtn"
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Salir"
         android:id="@+id/salirBtn"
-        android:layout_above="@+id/companiaTextView"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/minutos"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Proyecto desarrollado por los estudiantes:"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/companiaTextView"
+        android:layout_alignLeft="@+id/minutos"
+        android:layout_alignStart="@+id/minutos" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Joan Vidal 13-0980"
+        android:id="@+id/textView3"
+        android:layout_above="@+id/textView4"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="21dp" />
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Christian Martínez 14-0403"
+        android:id="@+id/textView4"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Francisco Torvisco 11-0402"
+        android:id="@+id/textView5"
+        android:layout_above="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="4dp" />
 
     android:layout_above="@+id/textView3"
         android:layout_centerHorizontal="true" />

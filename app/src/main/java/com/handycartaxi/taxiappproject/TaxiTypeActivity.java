@@ -176,7 +176,7 @@ public class TaxiTypeActivity extends Activity {
                 overridePendingTransition(R.anim.animation1,R.anim.animation2);
                 finishAffinity();
                 Toast.makeText(getApplicationContext(),"Se ha cancelado su solicitud", Toast.LENGTH_SHORT).show();
-
+                executorService.shutdown();
 
             }
         });

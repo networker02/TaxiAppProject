@@ -19,6 +19,7 @@ public class Global {
     public static double LON_TAXI;
     public static int TAXI_ID;
     public static int PEDIDO_ASIGNADO_AL_TAXISTA;
+    public static boolean AVISO_DE_LLEGADA;
 
 
     public static void setPEDIDO(int PEDIDO) {
