@@ -62,7 +62,7 @@ public class LoginActivity extends Activity {
         }
     } */
 
-    public  void checkCredentials(String username, String password){
+    public  void checkCredentials(final String username, String password){
 
 
 
@@ -88,6 +88,17 @@ public class LoginActivity extends Activity {
                         Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
                         startActivity(i);
                         overridePendingTransition(R.anim.animation1, R.anim.animation2);
+
+                        //Seteando el taxi ID
+                        if(username.equals("jvidal")){
+                            Global.TAXI_ID = 4;
+                        }else if(username.equals("ftorvisco")){
+                            Global.TAXI_ID = 5;
+                        }else {
+                            Global.TAXI_ID = 6;
+                        }
+
+
                     }else{
                         Toast.makeText(getApplicationContext(), "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
                     }

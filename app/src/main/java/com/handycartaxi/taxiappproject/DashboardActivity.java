@@ -17,7 +17,17 @@ import com.handycartaxi.taxiappproject.webserviceconection.AsyncHttp;
 import com.handycartaxi.taxiappproject.webserviceconection.DictionaryImp;
 import com.handycartaxi.taxiappproject.webserviceconection.HttpResponseCallback;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class DashboardActivity extends Activity {
+
+    GPSTracker gps;
+    ScheduledExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +44,72 @@ public class DashboardActivity extends Activity {
 
 
         final Switch ok_busy_switch = (Switch) findViewById(R.id.ok_busy_switch);
-        Button avisoBtn = (Button) findViewById(R.id.finServicioBtn);
+        final Button avisoBtn = (Button) findViewById(R.id.finServicioBtn);
         ImageButton panicButton = (ImageButton) findViewById(R.id.panicButton);
+        final Button terminarButton = (Button) findViewById(R.id.terminarSrvBtn);
+
+        gps = new GPSTracker(DashboardActivity.this);
+
+        // check if GPS enabled
+        if(gps.canGetLocation()){
+
+            Global.LAT_TAXI = gps.getLatitude();
+            Global.LON_TAXI = gps.getLongitude();
+
+            // \n is for new line
+            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + Global.LAT_TAXI + "\nLong: " + Global.LON_TAXI, Toast.LENGTH_LONG).show();
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
+        }
+
+        updateLocation();
+
+
+        executorService = Executors.newScheduledThreadPool(1);
+        executorService.scheduleAtFixedRate(new Runnable() {
+            public void run() {
+                //put query logic here
+
+                DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
+                dictionaryImp.put("TaxiId",""+Global.TAXI_ID);
+                System.out.println("Taxi ID "+Global.TAXI_ID);
+
+                AsyncHttp.get("http://" + Global.IP + "/taxwebapp/asignado/checkIfTaxiAssigned", dictionaryImp, new HttpResponseCallback() {
+                    @Override
+                    public void onFail(String errorMessage, int StatusCode) {
+                        System.out.println(errorMessage);
+                        Toast.makeText(getApplicationContext(), "No tiene servicio asignado"+Global.PEDIDO, Toast.LENGTH_LONG).show();
+
+                    }
+
+                    @Override
+                    public void call(String s) {
+                        System.out.println(s);
+
+
+                        MiTaxiEstaAsignado(s);
+
+
+
+
+
+                    }
+                });
+
+
+
+
+            }
+
+    }, 5, 5, TimeUnit.SECONDS);
+
+
+
+
+
 
         ok_busy_switch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,49 +117,47 @@ public class DashboardActivity extends Activity {
 
                 if(ok_busy_switch.isChecked()){
 //ENVIAR WEBSERVICE PARA QUE LE ASIGNEN UN SERVICIO
-                    Toast.makeText(getApplicationContext(), "Yes", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "Yes", Toast.LENGTH_SHORT).show();
+
+                    updateLocation();
 
 
-//CONSEGUIR LOS DATOS COMENTADOS
-                    DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
-        //            dictionaryImp.put("TaxiId",taxiId );
-        //            dictionaryImp.put("Longitud",longitud);
-        //            dictionaryImp.put("Latitud",latitud);
-                    AsyncHttp.get("http://"+Global.IP+"/taxwebapp/Taxi/UpdateLocation",dictionaryImp,new HttpResponseCallback() {
-                        @Override
-                        public void onFail(String errorMessage, int StatusCode) {
-
-                        }
-
-                        @Override
-                        public void call(String s) {
-
-
-                        }
-                    });
 
 //AQUI VA EL UN SERVICIO, EL TAXISTA ESCUCHA SI LE HAN ASIGNADO UN PEDIDO
+//poner en un serviciooooooo
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
                 }else{
- //ENVIAR WEBSERVICE PARA QUE NO LE ASIGNEN UN SERVICIO
+
                     Toast.makeText(getApplicationContext(), "No", Toast.LENGTH_SHORT).show();
 
-//CONSEGUIR LOS DATOS COMENTADOS
+
                     DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
-                    //            dictionaryImp.put("TaxiId",taxiId );
-                    //            dictionaryImp.put("Longitud",longitud);
-                    //            dictionaryImp.put("Latitud",latitud);
-                    AsyncHttp.get("http://"+Global.IP+"/taxwebapp/Taxi/TaxiUnavailable",dictionaryImp,new HttpResponseCallback() {
+                                dictionaryImp.put("TaxiId", "" + Global.TAXI_ID);
+                                dictionaryImp.put("Longitud",""+Global.LON_TAXI);
+                                dictionaryImp.put("Latitud",""+Global.LAT_TAXI);
+                    AsyncHttp.get("http://" + Global.IP + "/taxwebapp/Taxi/TaxiUnavailable", dictionaryImp, new HttpResponseCallback() {
                         @Override
                         public void onFail(String errorMessage, int StatusCode) {
-
+                            System.out.println(errorMessage);
                         }
 
                         @Override
                         public void call(String s) {
+                            System.out.println(s);
 
 
                         }
@@ -99,59 +171,85 @@ public class DashboardActivity extends Activity {
         });
 
 
-        avisoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent i = new Intent(getApplicationContext(), EnServicioActivity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.animation1,R.anim.animation2);
-                Toast.makeText(getApplicationContext(), "Unidad en Servicio", Toast.LENGTH_SHORT).show();
 
 
-//Poner aqui ping, para cambiar texto en la app del cliente para decirle que su taxista llegó
 
 
-                DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
+            avisoBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                public void onClick(View v) {
 
-//COMENTADO PORQUE HAY QUE PONER ID ASIGNADO
+                    if(Global.ID_ASIGNADO!=0){
+            //                Intent i = new Intent(getApplicationContext(), EnServicioActivity.class);
+            //                startActivity(i);
+            //                overridePendingTransition(R.anim.animation1,R.anim.animation2);
+                            Toast.makeText(getApplicationContext(), "Unidad en Servicio", Toast.LENGTH_SHORT).show();
+                            avisoBtn.setEnabled(false);
 
-  //              dictionaryImp.put("asignadoid",username );
+                            avisarllegada();
 
-                AsyncHttp.get("http://"+Global.IP+"/taxwebapp/Asignado/setTaxiArrival", dictionaryImp, new HttpResponseCallback() {
-                    @Override
-                    public void onFail(String errorMessage, int StatusCode) {
+                        //Poner aqui ping, para cambiar texto en la app del cliente para decirle que su taxista llegó
 
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Aun no se le ha asignado un servicio", Toast.LENGTH_LONG).show();
                     }
 
+                }
+
+             });
+
+
+
+
+                terminarButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void call(String s) {
+                    public void onClick(View v) {
+
+                        if(avisoBtn.isEnabled()){
+                            Toast.makeText(getApplicationContext(), "No puede terminar el servicio sin haber recogido al cliente y llegado al destino final", Toast.LENGTH_LONG).show();
+                        }else{
+
+                            terminarServicio();
 
 
+                        }
                     }
                 });
 
-            }
-        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         panicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
- //PONER AQUI WEBSERVICE PARA AVISAR PANICO O PELIGRO
 
-//COMENTADO PORQUE HAY QUE PONER ID PEDIDO
-
+//DONE & WORKING
                 DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
-//                dictionaryImp.put("TaxiID",username );
-                AsyncHttp.get("http://"+Global.IP+"/taxwebapp/Taxi/setpanicTrue",dictionaryImp,new HttpResponseCallback() {
+                dictionaryImp.put("TaxiID",""+Global.TAXI_ID);
+                AsyncHttp.get("http://" + Global.IP + "/taxwebapp/Taxi/setpanicTrue", dictionaryImp, new HttpResponseCallback() {
                     @Override
                     public void onFail(String errorMessage, int StatusCode) {
-
+                        System.out.println(errorMessage);
                     }
 
                     @Override
                     public void call(String s) {
-
+                        System.out.println(s);
 
                     }
                 });
@@ -163,11 +261,6 @@ public class DashboardActivity extends Activity {
 
             }
         });
-
-
-
-
-
 
 
 
@@ -191,5 +284,88 @@ public class DashboardActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updateLocation(){
+        DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
+        dictionaryImp.put("TaxiId",""+Global.TAXI_ID );
+        dictionaryImp.put("Longitud",""+Global.LON_TAXI);
+        dictionaryImp.put("Latitud",""+Global.LAT_TAXI);
+        AsyncHttp.get("http://"+Global.IP+"/taxwebapp/Taxi/UpdateLocation",dictionaryImp,new HttpResponseCallback() {
+            @Override
+            public void onFail(String errorMessage, int StatusCode) {
+                System.out.println("ERROR!!!!!!!!!!!!! "+errorMessage);
+            }
+
+            @Override
+            public void call(String s) {
+                System.out.println(s);
+
+            }
+        });
+    }
+
+    private void avisarllegada(){
+
+        DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
+
+        //COMENTADO PORQUE HAY QUE PONER ID ASIGNADO
+        //DONE & WORKING
+        dictionaryImp.put("asignadoid",""+Global.ID_ASIGNADO );
+
+        AsyncHttp.get("http://" + Global.IP + "/taxwebapp/Asignado/setTaxiArrival", dictionaryImp, new HttpResponseCallback() {
+            @Override
+            public void onFail(String errorMessage, int StatusCode) {
+                System.out.println(errorMessage);
+            }
+
+            @Override
+            public void call(String s) {
+                System.out.println(s);
+
+            }
+        });
+    }
+
+    public void terminarServicio(){
+
+
+        DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
+        dictionaryImp.put("AsignadoID",""+Global.ID_ASIGNADO);
+        AsyncHttp.get("http://" + Global.IP + "taxwebapp/Asignado/DestinationArrivalSucessFull", dictionaryImp, new HttpResponseCallback() {
+            @Override
+            public void onFail(String errorMessage, int StatusCode) {
+                System.out.println(errorMessage);
+            }
+
+            @Override
+            public void call(String s) {
+                System.out.println(s);
+
+            }
+        });
+    }
+
+    public void MiTaxiEstaAsignado(String s){
+        try {
+            System.out.println("ESTA ASIGNADO "+s);
+            JSONObject jsonObject = new JSONObject(s);
+            JSONObject jsonItem = jsonObject.getJSONObject("asign");
+
+            if(jsonItem!=null){
+                Global.ID_ASIGNADO = jsonItem.getInt("Asignado");
+                Global.PEDIDO = jsonItem.getInt("Pedido");
+                Global.LON = jsonItem.getDouble("Longitud");
+                Global.LAT = jsonItem.getDouble("Latitud");
+                Toast.makeText(getApplicationContext(), "Su taxi ha sido asignado a un servicio, Pedido: "+Global.PEDIDO, Toast.LENGTH_LONG).show();
+                executorService.shutdown();
+            }
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }

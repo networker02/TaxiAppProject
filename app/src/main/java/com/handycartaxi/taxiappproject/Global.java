@@ -13,6 +13,12 @@ public class Global {
     public static String COLOR_VEHICULO;
     public static int ID_FOTO_TAXISTA;
     public static int TIEMPO;
+    public static double LAT;
+    public static double LON;
+    public static double LAT_TAXI;
+    public static double LON_TAXI;
+    public static int TAXI_ID;
+    public static int PEDIDO_ASIGNADO_AL_TAXISTA;
 
 
     public static void setPEDIDO(int PEDIDO) {

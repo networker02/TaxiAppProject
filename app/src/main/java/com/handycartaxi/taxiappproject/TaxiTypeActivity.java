@@ -26,9 +26,9 @@ import org.json.JSONObject;
 public class TaxiTypeActivity extends Activity {
 
     int id_tipo_taxi=1;
-    double lat;
-    double lon;
-    GPSTracker mGPS = new GPSTracker(this);
+//    double lat;
+//    double lon;
+
     int id_compania;
     GPSTracker gps;
 
@@ -101,11 +101,11 @@ public class TaxiTypeActivity extends Activity {
                     // check if GPS enabled
                     if(gps.canGetLocation()){
 
-                        lat = gps.getLatitude();
-                        lon = gps.getLongitude();
+                        Global.LAT = gps.getLatitude();
+                        Global.LON = gps.getLongitude();
 
                         // \n is for new line
-                        Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + lat + "\nLong: " + lon, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + Global.LAT + "\nLong: " + Global.LON, Toast.LENGTH_LONG).show();
                     }else{
                         // can't get location
                         // GPS or Network is not enabled
@@ -113,13 +113,11 @@ public class TaxiTypeActivity extends Activity {
                         gps.showSettingsAlert();
                     }
 
-    //                LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-    //                mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,35000L,10.0f, mLocationListener);
 
                   DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
-                    dictionaryImp.put("Latitud",""+lat);
-                    dictionaryImp.put("Longitud",""+lon);
+                    dictionaryImp.put("Latitud",""+Global.LAT);
+                    dictionaryImp.put("Longitud",""+Global.LON);
                     dictionaryImp.put("TipoTaxi",""+id_tipo_taxi);
                     dictionaryImp.put("IdCompany",""+id_compania);
                     dictionaryImp.put("Cancelado","false");

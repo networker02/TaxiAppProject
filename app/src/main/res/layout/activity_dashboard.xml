@@ -14,10 +14,10 @@
         android:layout_height="wrap_content"
         android:text="Disponible"
         android:id="@+id/ok_busy_switch"
-        android:layout_marginTop="37dp"
-        android:layout_alignRight="@+id/finServicioBtn"
-        android:layout_alignEnd="@+id/finServicioBtn"
-        android:checked="true" />
+        android:layout_marginTop="34dp"
+        android:checked="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
         android:text="Aviso de Llegada"
         android:id="@+id/finServicioBtn"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:gravity="top" />
 
 
 
@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/panicButton"
         android:src="@drawable/panic_btn"
+
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -46,6 +47,15 @@
         android:layout_height="fill_parent"
         android:layout_above="@+id/finServicioBtn"
         android:layout_below="@+id/ok_busy_switch" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terminar Servicio"
+        android:id="@+id/terminarSrvBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/dashboardMap"
+        android:layout_alignEnd="@+id/dashboardMap" />
 
 
     <!--tools:layout="@layout/activity_maps"-->

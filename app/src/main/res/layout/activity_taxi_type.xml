@@ -38,7 +38,9 @@
             android:layout_marginTop="15dp"
             android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true"
-            android:checked="true" />
+            android:checked="true"
+            android:focusable="true"
+            android:enabled="true" />
 
         <RadioButton
             android:layout_width="fill_parent"
