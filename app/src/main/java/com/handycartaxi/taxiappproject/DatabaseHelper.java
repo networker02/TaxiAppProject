@@ -30,13 +30,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     final private Context mContext;
 
 
-    public final static String KEY_ID= "_id";
-    public final static String KEY_NOMBRE= "nombre";
-    public final static String KEY_CARRERA= "carrera";
-    public final static String KEY_MATRICULA = "matricula";
-    public final static String KEY_FOTO = "foto";
-    public final static String KEY_SEXO= "sexo";
-    public final static String KEY_FECHANAC= "fechaNac";
+//    public final static String KEY_ID= "_id";
+//    public final static String KEY_NOMBRE= "nombre";
+//    public final static String KEY_CARRERA= "carrera";
+//    public final static String KEY_MATRICULA = "matricula";
+//    public final static String KEY_FOTO = "foto";
+//    public final static String KEY_SEXO= "sexo";
+//    public final static String KEY_FECHANAC= "fechaNac";
 
 //COLUMNAS TABLA ASIGNADO
     public final static String KEY_ID_ASIGNADO = "_id_asignado";
@@ -51,8 +51,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //COLUMNAS TABLA COMPANIA
     public final static String KEY_ID_COMPANIA = "_id_compania";
     public final static String NOMBRE_COMPANIA = "nombre_compania";
+    public final static String LOGO_COMPANIA = "logo_compania";
 
-    public final static String[] columnasTableCompania = {KEY_ID_COMPANIA, NOMBRE_COMPANIA};
+    public final static String[] columnasTableCompania = {KEY_ID_COMPANIA, NOMBRE_COMPANIA, LOGO_COMPANIA};
 
 //COLUMNAS TABLA ESTATUSTAXI
     public final static String KEY_ID_ESTATUSTAXI = "_id_es";
@@ -91,13 +92,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public final static String[] columnasTableTaxista = {KEY_ID_TAXISTA, NOMBRE_TAXISTA, CEDULA, TELEFONO, ID_FOTO, ID_USUARIOLOGIN};
 
    //COLUMNAS TABLA TIPOTAXI
-    public final static String KEY_ID_TIPOTAXI = "_id_tipoaxi";
+    public final static String KEY_ID_TIPOTAXI = "_id_tipotaxi";
     public final static String NOMBRE_TIPOTAXI = "nombre_tipotaxi";
 
     public final static String[] columnasTableTipoTaxi = {KEY_ID_TIPOTAXI, NOMBRE_TIPOTAXI};
 
     //COLUMNAS TABLA USUARIOLOGIN
-    public final static String KEY_ID_USUARIOLOGIN = "_id_tipoaxi";
+    public final static String KEY_ID_USUARIOLOGIN = "_id_usuariologin";
     public final static String USUARIO = "usuario";
     public final static String CONTRASENA = "contrasena";
 
@@ -116,17 +117,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    private static final String CREATE_TABLE_ESTUDIANTES = "CREATE TABLE "
-            + TABLE_ESTUDIANTES + "("+ KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ KEY_NOMBRE + " TEXT,"+ KEY_CARRERA + " TEXT," + KEY_MATRICULA
-            + " TEXT," + KEY_FOTO + " INTEGER," + KEY_SEXO + " TEXT," + KEY_FECHANAC
-            + " TEXT" + ")";
+//    private static final String CREATE_TABLE_ESTUDIANTES = "CREATE TABLE "
+//            + TABLE_ESTUDIANTES + "("+ KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ KEY_NOMBRE + " TEXT,"+ KEY_CARRERA + " TEXT," + KEY_MATRICULA
+//            + " TEXT," + KEY_FOTO + " INTEGER," + KEY_SEXO + " TEXT," + KEY_FECHANAC
+//            + " TEXT" + ")";
 
     private static final String CREATE_TABLE_ASIGNADO = "CREATE TABLE "
             + TABLE_ASIGNADO + "("+ KEY_ID_ASIGNADO + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ ID_PEDIDO + " INTEGER,"+ ID_TAXI + " INTEGER," + TIEMPO
             + " INTEGER," + EXITOSO + " BIT," + A_HABILITADO + " BIT" + " )";
 
     private static final String CREATE_TABLE_COMPANIA = "CREATE TABLE "
-            + TABLE_COMPANIA + "("+ KEY_ID_COMPANIA + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ NOMBRE_COMPANIA + " TEXT"+" )";
+            + TABLE_COMPANIA + "("+ KEY_ID_COMPANIA + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ NOMBRE_COMPANIA + " TEXT, "+ LOGO_COMPANIA + " INTEGER"+") ";
 
     private static final String CREATE_TABLE_ESTATUSTAXI = "CREATE TABLE "
             + TABLE_ESTATUSTAXI + "("+ KEY_ID_ESTATUSTAXI + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ DESCRIPCION + " TEXT"+" )";
@@ -147,7 +148,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + TABLE_TIPOTAXI + "("+ KEY_ID_TIPOTAXI + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ NOMBRE_TIPOTAXI + " TEXT" + " )";
 
     private static final String CREATE_TABLE_USUARIOLOGIN = "CREATE TABLE "
-            + TABLE_TAXISTA + "("+ KEY_ID_USUARIOLOGIN + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ USUARIO + " TEXT,"+ CONTRASENA + " TEXT" + " )";
+            + TABLE_USUARIOLOGIN + "("+ KEY_ID_USUARIOLOGIN + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ USUARIO + " TEXT,"+ CONTRASENA + " TEXT" + " )";
 
     private static final String CREATE_TABLE_VEHICULO = "CREATE TABLE "
             + TABLE_VEHICULO + "("+ KEY_ID_VEHICULO + " INTEGER PRIMARY KEY AUTOINCREMENT,"+ COLOR_VEHICULO + " TEXT,"+ FOTO_VEHICULO + " TEXT,"
@@ -163,29 +164,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_ESTUDIANTES);
-        db.execSQL(CREATE_TABLE_ASIGNADO);
+//        db.execSQL(CREATE_TABLE_ESTUDIANTES);
+//        db.execSQL(CREATE_TABLE_ASIGNADO);
         db.execSQL(CREATE_TABLE_COMPANIA);
-        db.execSQL(CREATE_TABLE_ESTATUSTAXI);
-        db.execSQL(CREATE_TABLE_PEDIDO);
-        db.execSQL(CREATE_TABLE_TAXI);
-        db.execSQL(CREATE_TABLE_TAXISTA);
-        db.execSQL(CREATE_TABLE_TIPOTAXI);
-        db.execSQL(CREATE_TABLE_USUARIOLOGIN);
-        db.execSQL(CREATE_TABLE_VEHICULO);
+//        db.execSQL(CREATE_TABLE_ESTATUSTAXI);
+//        db.execSQL(CREATE_TABLE_PEDIDO);
+//        db.execSQL(CREATE_TABLE_TAXI);
+//        db.execSQL(CREATE_TABLE_TAXISTA);
+//        db.execSQL(CREATE_TABLE_TIPOTAXI);
+//        db.execSQL(CREATE_TABLE_USUARIOLOGIN);
+//        db.execSQL(CREATE_TABLE_VEHICULO);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ESTUDIANTES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ASIGNADO);
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ESTUDIANTES);
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ASIGNADO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMPANIA);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PEDIDO);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TAXI);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TAXISTA);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TIPOTAXI);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USUARIOLOGIN);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_VEHICULO);
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PEDIDO);
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TAXI);
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TAXISTA);
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TIPOTAXI);
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USUARIOLOGIN);
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_VEHICULO);
 
 
         onCreate(db);

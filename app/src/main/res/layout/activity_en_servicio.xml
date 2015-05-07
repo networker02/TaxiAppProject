@@ -9,20 +9,10 @@
     tools:context="com.handycartaxi.taxiappproject.DashboardActivity">
 
 
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Disponible"
-        android:id="@+id/ok_busy_switch"
-        android:layout_marginTop="37dp"
-        android:layout_alignRight="@+id/finServicioBtn"
-        android:layout_alignEnd="@+id/finServicioBtn"
-        android:checked="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aviso de Llegada"
+        android:text="Finalizar Servicio"
         android:id="@+id/finServicioBtn"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
@@ -32,22 +22,19 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/panicButton"
+        android:id="@+id/panicButton1"
         android:src="@drawable/panic_btn"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/ok_busy_switch" />
+        android:layout_alignParentEnd="true" />
 
-    <fragment
-        android:id="@+id/dashboardMap"
-        android:name="com.google.android.gms.maps.MapFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_above="@+id/finServicioBtn"
-        android:layout_below="@+id/ok_busy_switch" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Taxi En Servicio"
+        android:id="@+id/textView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
-
-    <!--tools:layout="@layout/activity_maps"-->
-    <!--android:name="com.google.android.gms.maps.MapFragment"-->
 </RelativeLayout>

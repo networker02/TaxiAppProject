@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Por favor, pague su tarifa"
-        android:id="@+id/textView2"
+        android:id="@+id/minutos"
         android:layout_below="@+id/textView"
         android:layout_alignLeft="@+id/imageView"
         android:layout_alignStart="@+id/imageView"
@@ -41,17 +41,17 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Gracias por utilizar HandyCar"
-        android:id="@+id/textView3"
+        android:id="@+id/companiaTextView"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2" />
+        android:layout_alignLeft="@+id/minutos"
+        android:layout_alignStart="@+id/minutos" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Salir"
         android:id="@+id/salirBtn"
-        android:layout_above="@+id/textView3"
+        android:layout_above="@+id/companiaTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="21dp" />
 

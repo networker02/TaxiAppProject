@@ -26,18 +26,19 @@
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="38dp">
+        android:layout_marginTop="38dp"
+        android:checkedButton="@+id/regularOption" >
 
 
         <RadioButton
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Unidad Regular"
-            android:id="@+id/radioButton1"
+            android:id="@+id/regularOption"
             android:layout_marginTop="15dp"
-            android:checked="false"
             android:layout_below="@+id/textView"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:checked="true" />
 
         <RadioButton
             android:layout_width="fill_parent"
@@ -45,9 +46,9 @@
             android:text="Minibus"
             android:id="@+id/minubusOption"
             android:checked="false"
-            android:layout_below="@+id/radioButton1"
-            android:layout_alignLeft="@+id/radioButton1"
-            android:layout_alignStart="@+id/radioButton1"
+            android:layout_below="@+id/regularOption"
+            android:layout_alignLeft="@+id/regularOption"
+            android:layout_alignStart="@+id/regularOption"
             android:layout_marginTop="15dp" />
 
         <RadioButton
@@ -95,9 +96,17 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Al presionar Pedir, usted acepta nuestros Términos y Condiciones"
-        android:id="@+id/textView2"
+        android:id="@+id/minutos"
         android:layout_above="@+id/pedirButton2"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Compania"
+        android:id="@+id/companiaTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

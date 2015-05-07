@@ -24,6 +24,7 @@ public class MapsActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        getActionBar().hide();
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
     }
@@ -68,7 +69,7 @@ public class MapsActivity extends FragmentActivity {
      * <p>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
-    private void setUpMap() {
+    public void setUpMap() {
         mMap.setMyLocationEnabled(true);
         mMap.getMyLocation();
         mMap.getUiSettings();

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ public class LlegadaActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        getActionBar().hide();
         setContentView(R.layout.activity_llegada);
 
         Button salirButton = (Button) findViewById(R.id.salirBtn);
@@ -57,13 +59,23 @@ public class LlegadaActivity extends Activity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Write your code here to execute after dialog
-                                Toast.makeText(getApplicationContext(), "You clicked on NO", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "You clicked on NO", Toast.LENGTH_SHORT).show();
                                 dialog.cancel();
+
+                                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(i);
+                                overridePendingTransition(R.anim.animation1,R.anim.animation2);
+                                finishAffinity();
                             }
                         });
 
                 // Showing Alert Message
                 alertDialog.show();
+
+
+
+
+
 
             }
         });

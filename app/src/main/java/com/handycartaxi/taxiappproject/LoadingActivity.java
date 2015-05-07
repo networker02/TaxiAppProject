@@ -16,6 +16,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.handycartaxi.taxiappproject.webserviceconection.AsyncHttp;
+import com.handycartaxi.taxiappproject.webserviceconection.DictionaryImp;
+import com.handycartaxi.taxiappproject.webserviceconection.HttpResponseCallback;
+
 public class LoadingActivity extends Activity {
     int myProgress = 0;
     ProgressBar  myProgressBar;
@@ -24,6 +28,7 @@ public class LoadingActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        getActionBar().hide();
         setContentView(R.layout.activity_loading);
 
         Button cancelBtn = (Button) findViewById(R.id.cancelBtn);
@@ -42,6 +47,27 @@ public class LoadingActivity extends Activity {
                 finishAffinity();
                 //Colocar aqui cancel para el WebService
 //                showDialog();
+
+
+//COMENTADO PORQUE HAY QUE PONER ID PEDIDO
+                DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
+//                dictionaryImp.put("PedidoID",idPedido );
+
+                AsyncHttp.get("http://"+Global.IP+"/taxwebapp/Pedido/canceled", dictionaryImp, new HttpResponseCallback() {
+                    @Override
+                    public void onFail(String errorMessage, int StatusCode) {
+
+                    }
+
+                    @Override
+                    public void call(String s) {
+
+
+                    }
+                });
+
+
+
             }
 
 
@@ -53,7 +79,7 @@ public class LoadingActivity extends Activity {
 
                 public void run() {
                     //don't hard code things, use a constant for max progress value
-                    while ( myProgress<100 ){
+                    while ( myProgress<500 ){
                         try{
                             myHandle.sendMessage(myHandle.obtainMessage());
                             //same
@@ -71,7 +97,28 @@ public class LoadingActivity extends Activity {
                         startActivity(i);
                         overridePendingTransition(R.anim.animation1, R.anim.animation2);
                         finish();
-                        //Colocar aqui GET DRIVER para el WebService
+ //Colocar aqui Servicio GET DRIVER para el WebService
+
+
+//REVISAR
+   /*
+                        DictionaryImp<String,String> dictionaryImp = new DictionaryImp();
+//                        dictionaryImp.put("username",username );
+//                        dictionaryImp.put("password",password);
+                        AsyncHttp.get("http://"+Global.IP+"/taxwebapp/UserLogin/IsLoginCorrect",dictionaryImp,new HttpResponseCallback() {
+                            @Override
+                            public void onFail(String errorMessage, int StatusCode) {
+
+                            }
+
+                            @Override
+                            public void call(String s) {
+
+
+                            }
+                        });
+*/
+
                     }
 
                 }//met

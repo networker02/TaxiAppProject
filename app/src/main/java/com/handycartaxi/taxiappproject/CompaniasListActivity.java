@@ -1,7 +1,10 @@
 package com.handycartaxi.taxiappproject;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,6 +15,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +27,16 @@ public class CompaniasListActivity extends Activity {
     private ListView list;
     private static boolean ONCE=true;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-
         list = (ListView)findViewById(R.id.taxiCompanylistView);
+
 
 
 
@@ -46,26 +54,31 @@ public class CompaniasListActivity extends Activity {
         }else{
             Compania co = (Compania) bund.getSerializable("new");
 
-           companias.add(co);
+            companias.add(co);
             list.invalidateViews();
         }
+
+
+
+
 
     }
 
 
     private void fillCompaniesList(){
-        companias.add(new Compania(R.drawable.excelentetaxilogo));
-        companias.add(new Compania(R.drawable.apolotaxilogo3));
-        companias.add(new Compania(R.drawable.ruedataxilogo2));
-        companias.add(new Compania(R.drawable.aerotaxilogo));
-        companias.add(new Compania(R.drawable.antenataxilogo));
-        companias.add(new Compania(R.drawable.apolotaxilogo3));
-        companias.add(new Compania(R.drawable.ruedataxilogo2));
-        companias.add(new Compania(R.drawable.aerotaxilogo));
-        companias.add(new Compania(R.drawable.excelentetaxilogo));
-        companias.add(new Compania(R.drawable.apolotaxilogo3));
-        companias.add(new Compania(R.drawable.ruedataxilogo2));
-        companias.add(new Compania(R.drawable.aerotaxilogo));
+        companias.add(new Compania("Apolo Taxi",R.drawable.apolotaxilogo4,1));
+        companias.add(new Compania("Fama Taxi",R.drawable.famataxilogo,2));
+        companias.add(new Compania("Excelente Taxi", R.drawable.excelentetaxilogo,3));
+        companias.add(new Compania("Rueda Taxi",R.drawable.ruedataxilogo2,4));
+        companias.add(new Compania("Aero Taxi",R.drawable.aerotaxilogo,5));
+        companias.add(new Compania("Antena Taxi",R.drawable.antenataxilogo,6));
+//        companias.add(new Compania("Excelente Taxi",R.drawable.apolotaxilogo3));
+//        companias.add(new Compania("Excelente Taxi",R.drawable.ruedataxilogo2));
+//        companias.add(new Compania("Excelente Taxi",R.drawable.aerotaxilogo));
+//        companias.add(new Compania("Excelente Taxi",R.drawable.excelentetaxilogo));
+//        companias.add(new Compania("Excelente Taxi",R.drawable.apolotaxilogo3));
+//        companias.add(new Compania("Excelente Taxi",R.drawable.ruedataxilogo2));
+//        companias.add(new Compania("Excelente Taxi",R.drawable.aerotaxilogo));
 
     }
 
@@ -112,13 +125,16 @@ public class CompaniasListActivity extends Activity {
 
 
                 Intent itemClick = new Intent(getApplicationContext(), TaxiTypeActivity.class);
-//                itemClick.putExtra("compania", companias.get(position));
+                itemClick.putExtra("compania",companias.get(position));
+
                 startActivity(itemClick);
                 overridePendingTransition(R.anim.animation1,R.anim.animation2);
 
             }
         });
     }
+
+
 
 
     @Override

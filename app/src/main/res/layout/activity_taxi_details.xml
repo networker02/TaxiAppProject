@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Matricula"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="19dp"
         android:layout_below="@+id/taxistaUnidad"
         android:layout_alignLeft="@+id/taxistaUnidad"
         android:layout_alignStart="@+id/taxistaUnidad" />
@@ -78,5 +78,24 @@
         android:src="@drawable/vehicle"
         android:layout_below="@+id/taxistaVehiculo"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Su taxi llegará en "
+        android:id="@+id/textView"
+        android:layout_above="@+id/cancelarBtn"
+        android:layout_alignLeft="@+id/taxistaFoto"
+        android:layout_alignStart="@+id/taxistaFoto" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="minutos"
+        android:id="@+id/minutos"
+        android:layout_alignTop="@+id/textView"
+        android:layout_toRightOf="@+id/textView" />
 
 </RelativeLayout>
