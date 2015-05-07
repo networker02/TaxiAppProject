@@ -1,18 +1,29 @@
 package com.handycartaxi.taxiappproject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.LatLng;
 import com.handycartaxi.taxiappproject.webserviceconection.AsyncHttp;
 import com.handycartaxi.taxiappproject.webserviceconection.DictionaryImp;
 import com.handycartaxi.taxiappproject.webserviceconection.HttpResponseCallback;
@@ -380,4 +391,12 @@ public class DashboardActivity extends Activity {
         }
 
     }
+
+
+
+
+
+
+
+
 }
